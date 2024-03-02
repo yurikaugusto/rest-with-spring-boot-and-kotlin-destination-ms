@@ -1,4 +1,4 @@
-package br.com.yuri.restwithspringbootandkotlindestinationms
+package br.com.yuri
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

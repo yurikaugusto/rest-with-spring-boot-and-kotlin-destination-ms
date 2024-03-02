@@ -1,4 +1,4 @@
-package br.com.yuri.restwithspringbootandkotlindestinationms
+package br.com.yuri
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
