@@ -28,7 +28,7 @@ dependencies {
 	implementation("org.flywaydb:flyway-mysql")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.mysql:mysql-connector-java")
+	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
