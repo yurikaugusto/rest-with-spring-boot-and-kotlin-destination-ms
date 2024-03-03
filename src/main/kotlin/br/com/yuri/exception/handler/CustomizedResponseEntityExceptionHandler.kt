@@ -14,6 +14,7 @@ import java.util.*
 @ControllerAdvice
 @RestController
 class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
+
     @ExceptionHandler(Exception::class)
     fun handleAllExceptions(ex: Exception, request: WebRequest): ResponseEntity<ExceptionResponse> {
         val exceptionResponse: ExceptionResponse =
@@ -24,7 +25,6 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
             )
         return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
-
 
     @ExceptionHandler(ResourceNotFoundException::class)
     fun handleBadRequestExceptions(ex: Exception, request: WebRequest): ResponseEntity<ExceptionResponse> {

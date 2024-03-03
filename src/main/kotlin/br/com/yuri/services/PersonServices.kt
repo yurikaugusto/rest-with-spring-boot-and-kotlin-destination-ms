@@ -3,49 +3,29 @@ package br.com.yuri.services
 import br.com.yuri.exception.ResourceNotFoundException
 import br.com.yuri.model.Person
 import br.com.yuri.repository.PersonRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class PersonServices {
-    @Autowired
-    var repository: PersonRepository? = null
+class PersonServices(private val repository: PersonRepository) {
 
-    fun create(person: Person): Person {
-        return repository!!.save(person)
-    }
+    fun create(person: Person): Person = repository.save(person)
 
-    fun findAll(): List<Person?> {
-        return repository!!.findAll()
-    }
+    fun findAll(): List<Person> = repository.findAll()
 
-    fun findById(id: Long): Person {
-        return repository!!.findById(id).orElseThrow {
-            ResourceNotFoundException(
-                "No records found for this ID"
-            )
-        } as Person
-    }
+    fun findById(id: Long): Person = repository.findById(id)
+        .orElseThrow { ResourceNotFoundException("No records found for this ID") }
 
     fun update(person: Person): Person {
-        val entity = repository!!.findById(person.id!!).orElseThrow {
-            ResourceNotFoundException(
-                "No records found for this ID"
-            )
-        } as Person
-        entity.firstName = person.firstName
-        entity.lastName = person.lastName
-        entity.address = person.address
-        entity.gender = person.gender
-        return repository!!.save(entity)
+//        person.id!! "!!" force operator, asserts that an expression is non-nullable
+//        this operator states that the id value is not null, if so, when executing the application
+//        a NullPointerException will be thrown
+        val entity = findById(person.id!!)
+        person.id = entity.id
+        return repository.save(entity)
     }
 
     fun delete(id: Long) {
-        val entity = repository!!.findById(id).orElseThrow {
-            ResourceNotFoundException(
-                "No records found for this ID"
-            )
-        } as Person
-        repository!!.delete(entity)
+        val person = findById(id)
+        repository.delete(person)
     }
 }
