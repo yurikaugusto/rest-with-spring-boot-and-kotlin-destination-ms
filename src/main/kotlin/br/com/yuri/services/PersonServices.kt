@@ -21,7 +21,7 @@ class PersonServices(private val repository: PersonRepository) {
 //        a NullPointerException will be thrown
         val entity = findById(person.id!!)
         person.id = entity.id
-        return repository.save(entity)
+        return repository.save(person)
     }
 
     fun delete(id: Long) {

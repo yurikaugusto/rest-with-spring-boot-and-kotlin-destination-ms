@@ -104,7 +104,7 @@ class PersonControllerTest : AbstractIntegrationTest() {
 
         assertEquals(person!!.id, updatedPerson.id)
         assertEquals("Richard", updatedPerson.firstName)
-        assertEquals("Stallman", updatedPerson.lastName)
+        assertEquals("Matthew Stallman", updatedPerson.lastName)
         assertEquals("New York City, New York, US", updatedPerson.address)
         assertEquals("Male", updatedPerson.gender)
     }
@@ -135,7 +135,7 @@ class PersonControllerTest : AbstractIntegrationTest() {
 
         assertEquals(person!!.id, foundPerson.id)
         assertEquals("Richard", foundPerson.firstName)
-        assertEquals("Stallman", foundPerson.lastName)
+        assertEquals("Matthew Stallman", foundPerson.lastName)
         assertEquals("New York City, New York, US", foundPerson.address)
         assertEquals("Male", foundPerson.gender)
     }
