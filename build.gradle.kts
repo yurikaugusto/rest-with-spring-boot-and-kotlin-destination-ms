@@ -29,6 +29,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.mysql:mysql-connector-j")
+
+	testImplementation("org.testcontainers:testcontainers:1.16.3")
+	testImplementation("io.rest-assured:rest-assured:4.5.0")
+	testImplementation("org.mockito:mockito:4.4.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
