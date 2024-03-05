@@ -1,8 +1,8 @@
 package br.com.yuri.unittests.services
 
-import br.com.yuri.model.Person
-import br.com.yuri.repository.PersonRepository
-import br.com.yuri.services.PersonServices
+import br.com.yuri.deprecated.model.Person
+import br.com.yuri.deprecated.repository.PersonRepositoryDeprecated
+import br.com.yuri.deprecated.services.PersonServices
 import br.com.yuri.unittests.services.mocks.MockPerson
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -19,7 +19,7 @@ import java.util.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
-class PersonServicesTest {
+class PersonDomainServicesTest {
 
     private var input: MockPerson? = null
 
@@ -27,7 +27,7 @@ class PersonServicesTest {
     private val service: PersonServices? = null
 
     @Mock
-    var repository: PersonRepository? = null
+    var repository: PersonRepositoryDeprecated? = null
 
     @BeforeEach
     fun SetupMock(){

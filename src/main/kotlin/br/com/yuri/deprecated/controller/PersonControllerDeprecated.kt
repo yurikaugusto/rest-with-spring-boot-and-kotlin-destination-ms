@@ -1,13 +1,13 @@
-package br.com.yuri.controller
+package br.com.yuri.deprecated.controller
 
-import br.com.yuri.model.Person
-import br.com.yuri.services.PersonServices
+import br.com.yuri.deprecated.model.Person
+import br.com.yuri.deprecated.services.PersonServices
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/person")
-class PersonController(private val service: PersonServices) {
+@RequestMapping("v1/person")
+class PersonControllerDeprecated(private val service: PersonServices) {
 
     @GetMapping
     fun findAll(): List<Person> {

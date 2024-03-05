@@ -1,8 +1,8 @@
-package br.com.yuri.services
+package br.com.yuri.deprecated.services
 
-import br.com.yuri.exception.ResourceNotFoundException
-import br.com.yuri.model.Person
-import br.com.yuri.repository.PersonRepository
+import br.com.yuri.deprecated.exception.ResourceNotFoundException
+import br.com.yuri.deprecated.model.Person
+import br.com.yuri.deprecated.repository.PersonRepositoryDeprecated
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class PersonServices {
 
     @Autowired
-    private lateinit var repository: PersonRepository
+    private lateinit var repository: PersonRepositoryDeprecated
 
     fun create(person: Person): Person = repository.save(person)
 

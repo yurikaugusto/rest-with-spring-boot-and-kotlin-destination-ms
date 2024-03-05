@@ -1,6 +1,6 @@
 package br.com.yuri.unittests.services.mocks
 
-import br.com.yuri.model.Person
+import br.com.yuri.deprecated.model.Person
 
 class MockPerson {
     fun mockEntityList(): ArrayList<Person> {

@@ -1,7 +1,7 @@
-package br.com.yuri.exception.handler
+package br.com.yuri.deprecated.exception.handler
 
-import br.com.yuri.exception.ExceptionResponse
-import br.com.yuri.exception.ResourceNotFoundException
+import br.com.yuri.deprecated.exception.ExceptionResponse
+import br.com.yuri.deprecated.exception.ResourceNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice

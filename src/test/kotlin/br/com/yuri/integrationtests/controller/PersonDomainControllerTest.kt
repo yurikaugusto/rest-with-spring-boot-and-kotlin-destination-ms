@@ -1,7 +1,7 @@
 package br.com.yuri.integrationtests.controller
 
 import br.com.yuri.config.TestsConfig
-import br.com.yuri.model.Person
+import br.com.yuri.deprecated.model.Person
 import br.com.yuri.testcontainers.AbstractIntegrationTest
 import io.restassured.RestAssured.given
 import io.restassured.builder.RequestSpecBuilder
@@ -20,7 +20,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(OrderAnnotation::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PersonControllerTest : AbstractIntegrationTest() {
+class PersonDomainControllerTest : AbstractIntegrationTest() {
 
     private var specification: RequestSpecification? = null
     private var objectMapper: ObjectMapper? = null

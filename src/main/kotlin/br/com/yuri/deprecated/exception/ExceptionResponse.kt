@@ -1,4 +1,4 @@
-package br.com.yuri.exception
+package br.com.yuri.deprecated.exception
 
 import java.util.*
 
