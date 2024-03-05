@@ -3,10 +3,14 @@ package br.com.yuri.services
 import br.com.yuri.exception.ResourceNotFoundException
 import br.com.yuri.model.Person
 import br.com.yuri.repository.PersonRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class PersonServices(private val repository: PersonRepository) {
+class PersonServices {
+
+    @Autowired
+    private lateinit var repository: PersonRepository
 
     fun create(person: Person): Person = repository.save(person)
 
