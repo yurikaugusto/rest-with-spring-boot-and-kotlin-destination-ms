@@ -5,7 +5,7 @@ import br.com.yuri.adapters.`in`.controller.response.PersonResponse
 import br.com.yuri.application.core.domain.PersonDomain
 import br.com.yuri.application.ports.`in`.FindPersonInputPort
 import br.com.yuri.application.ports.`in`.InsertPersonInputPort
-import br.com.yuri.deprecated.model.Person
+import br.com.yuri.application.ports.`in`.UpdatePersonInputPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("v2/person")
 class PersonController(
     private val insertPersonInputPort: InsertPersonInputPort,
-    private val findPersonInputPort: FindPersonInputPort
+    private val findPersonInputPort: FindPersonInputPort,
+    private val updatePersonInputPort: UpdatePersonInputPort
 ) {
 
     @PostMapping
@@ -37,7 +38,10 @@ class PersonController(
     }
 
     @PutMapping
-    fun update(@RequestBody person: Person): Person = TODO("NOT IMPLEMENTED")
+    fun update(@RequestBody person: PersonRequest): ResponseEntity<*> {
+        val updatedPerson: PersonDomain = updatePersonInputPort.update(PersonDomain(person.id, person.firstName, person.lastName, person.address, person.gender))
+        return ResponseEntity(PersonResponse(updatedPerson.id, updatedPerson.firstName, updatedPerson.lastName, updatedPerson.address, updatedPerson.gender), HttpStatus.OK)
+    }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Long): ResponseEntity<*> {
