@@ -3,6 +3,7 @@ package br.com.yuri.adapters.`in`.controller
 import br.com.yuri.adapters.`in`.controller.request.PersonRequest
 import br.com.yuri.adapters.`in`.controller.response.PersonResponse
 import br.com.yuri.application.core.domain.PersonDomain
+import br.com.yuri.application.ports.`in`.DeletePersonInputPort
 import br.com.yuri.application.ports.`in`.FindPersonInputPort
 import br.com.yuri.application.ports.`in`.InsertPersonInputPort
 import br.com.yuri.application.ports.`in`.UpdatePersonInputPort
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.*
 class PersonController(
     private val insertPersonInputPort: InsertPersonInputPort,
     private val findPersonInputPort: FindPersonInputPort,
-    private val updatePersonInputPort: UpdatePersonInputPort
+    private val updatePersonInputPort: UpdatePersonInputPort,
+    private val deletePersonInputPort: DeletePersonInputPort
 ) {
 
     @PostMapping
@@ -45,6 +47,7 @@ class PersonController(
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Long): ResponseEntity<*> {
-        TODO("NOT IMPLEMENTED")
+        deletePersonInputPort.deleteById(id)
+        return ResponseEntity(null, HttpStatus.NO_CONTENT)
     }
 }
