@@ -17,8 +17,10 @@ class PersonController(
 ) {
 
     @GetMapping
-    fun findAll(): List<Person> {
-        TODO("NOT IMPLEMENTED")
+    fun findAll(): List<PersonResponse> {
+        val listPerson = findPersonInputPort.findAll()
+        val personResponseList = listPerson.map { PersonResponse(it.id, it.firstName, it.lastName, it.address, it.gender) }
+        return personResponseList
     }
 
     @GetMapping("{id}")

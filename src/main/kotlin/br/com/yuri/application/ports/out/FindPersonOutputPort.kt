@@ -4,4 +4,5 @@ import br.com.yuri.application.core.domain.PersonDomain
 
 interface FindPersonOutputPort {
     fun findById(id: Long): PersonDomain
+    fun findAll(): List<PersonDomain>
 }

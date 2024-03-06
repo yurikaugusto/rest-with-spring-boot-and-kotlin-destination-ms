@@ -11,4 +11,8 @@ class FindPersonUseCase(
     override fun findById(id: Long): PersonDomain {
         return findPersonOutputPort.findById(id)
     }
+
+    override fun findAll(): List<PersonDomain> {
+        return findPersonOutputPort.findAll()
+    }
 }
