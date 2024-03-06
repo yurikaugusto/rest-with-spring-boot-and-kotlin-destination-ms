@@ -8,7 +8,6 @@ class InsertPersonUseCase(
     private val insertPersonOutputPort: InsertPersonOutputPort
 ) : InsertPersonInputPort {
     override fun create(personDomain: PersonDomain): PersonDomain {
-        println("InsertPersonUseCase person received: $personDomain")
         return insertPersonOutputPort.create(personDomain)
     }
 }

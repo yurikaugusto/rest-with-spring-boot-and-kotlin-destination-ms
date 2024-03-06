@@ -13,7 +13,6 @@ class InsertPersonAdapter(
 
     override fun create(personDomain: PersonDomain): PersonDomain {
         val personEntity = repository.save(PersonEntity(null, personDomain.firstName, personDomain.lastName, personDomain.address, personDomain.gender))
-        println("InsertPersonAdapter will save the person in the database: $personDomain")
         return PersonDomain(personEntity.id, personEntity.firstName, personEntity.lastName, personEntity.address, personEntity.gender)
     }
 }

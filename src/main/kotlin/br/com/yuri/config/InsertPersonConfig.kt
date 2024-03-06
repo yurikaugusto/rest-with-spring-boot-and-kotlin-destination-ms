@@ -10,5 +10,4 @@ class InsertPersonConfig {
     @Bean
     fun insertPersonUseCaseBean(insertPersonAdapter: InsertPersonAdapter): InsertPersonUseCase =
         InsertPersonUseCase(insertPersonAdapter)
-
 }
