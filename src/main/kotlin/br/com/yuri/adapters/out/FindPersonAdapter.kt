@@ -12,8 +12,15 @@ class FindPersonAdapter(
     private val repository: PersonRepository
 ) : FindPersonOutputPort {
     override fun findById(id: Long): PersonDomain {
-        val personEntity = repository.findById(id).getOrNull() ?: throw PersonNotFoundException("Person with id: $id not found")
-        return PersonDomain(personEntity.id, personEntity.firstName, personEntity.lastName, personEntity.address, personEntity.gender)
+        val personEntity =
+            repository.findById(id).getOrNull() ?: throw PersonNotFoundException("Person with id: $id not found")
+        return PersonDomain(
+            personEntity.id,
+            personEntity.firstName,
+            personEntity.lastName,
+            personEntity.address,
+            personEntity.gender
+        )
     }
 
     override fun findAll(): List<PersonDomain> {

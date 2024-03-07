@@ -22,27 +22,68 @@ class PersonController(
 
     @PostMapping
     fun create(@RequestBody personRequest: PersonRequest): ResponseEntity<*> {
-        val personDomain = insertPersonInputPort.create(PersonDomain(null, personRequest.firstName, personRequest.lastName, personRequest.address,personRequest.gender))
-        return ResponseEntity(PersonResponse(personDomain.id, personDomain.firstName, personDomain.lastName, personDomain.address,personDomain.gender), HttpStatus.CREATED)
+        val personDomain = insertPersonInputPort.create(
+            PersonDomain(
+                null,
+                personRequest.firstName,
+                personRequest.lastName,
+                personRequest.address,
+                personRequest.gender
+            )
+        )
+        return ResponseEntity(
+            PersonResponse(
+                personDomain.id,
+                personDomain.firstName,
+                personDomain.lastName,
+                personDomain.address,
+                personDomain.gender
+            ), HttpStatus.CREATED
+        )
     }
 
     @GetMapping
     fun findAll(): ResponseEntity<*> {
         val listPerson = findPersonInputPort.findAll()
-        val personResponseList = listPerson.map { PersonResponse(it.id, it.firstName, it.lastName, it.address, it.gender) }
+        val personResponseList =
+            listPerson.map { PersonResponse(it.id, it.firstName, it.lastName, it.address, it.gender) }
         return ResponseEntity(personResponseList, HttpStatus.OK)
     }
 
     @GetMapping("{id}")
     fun findById(@PathVariable("id") id: Long): ResponseEntity<*> {
         val personDomain = findPersonInputPort.findById(id)
-        return ResponseEntity(PersonResponse(personDomain.id, personDomain.firstName, personDomain.lastName, personDomain.address, personDomain.gender), HttpStatus.OK)
+        return ResponseEntity(
+            PersonResponse(
+                personDomain.id,
+                personDomain.firstName,
+                personDomain.lastName,
+                personDomain.address,
+                personDomain.gender
+            ), HttpStatus.OK
+        )
     }
 
     @PutMapping
     fun update(@RequestBody person: PersonRequest): ResponseEntity<*> {
-        val updatedPerson: PersonDomain = updatePersonInputPort.update(PersonDomain(person.id, person.firstName, person.lastName, person.address, person.gender))
-        return ResponseEntity(PersonResponse(updatedPerson.id, updatedPerson.firstName, updatedPerson.lastName, updatedPerson.address, updatedPerson.gender), HttpStatus.OK)
+        val updatedPerson: PersonDomain = updatePersonInputPort.update(
+            PersonDomain(
+                person.id,
+                person.firstName,
+                person.lastName,
+                person.address,
+                person.gender
+            )
+        )
+        return ResponseEntity(
+            PersonResponse(
+                updatedPerson.id,
+                updatedPerson.firstName,
+                updatedPerson.lastName,
+                updatedPerson.address,
+                updatedPerson.gender
+            ), HttpStatus.OK
+        )
     }
 
     @DeleteMapping("/{id}")

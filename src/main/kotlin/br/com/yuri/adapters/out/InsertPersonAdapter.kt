@@ -12,7 +12,21 @@ class InsertPersonAdapter(
 ) : InsertPersonOutputPort {
 
     override fun create(personDomain: PersonDomain): PersonDomain {
-        val personEntity = repository.save(PersonEntity(null, personDomain.firstName, personDomain.lastName, personDomain.address, personDomain.gender))
-        return PersonDomain(personEntity.id, personEntity.firstName, personEntity.lastName, personEntity.address, personEntity.gender)
+        val personEntity = repository.save(
+            PersonEntity(
+                null,
+                personDomain.firstName,
+                personDomain.lastName,
+                personDomain.address,
+                personDomain.gender
+            )
+        )
+        return PersonDomain(
+            personEntity.id,
+            personEntity.firstName,
+            personEntity.lastName,
+            personEntity.address,
+            personEntity.gender
+        )
     }
 }

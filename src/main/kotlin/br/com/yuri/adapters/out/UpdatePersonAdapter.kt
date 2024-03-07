@@ -12,7 +12,21 @@ class UpdatePersonAdapter(
 ) : UpdatePersonOutputPort {
 
     override fun update(personDomain: PersonDomain): PersonDomain {
-        val personSaved = repository.save(PersonEntity(personDomain.id, personDomain.firstName, personDomain.lastName, personDomain.address, personDomain.gender))
-        return PersonDomain(personSaved.id, personSaved.firstName, personSaved.lastName, personSaved.address, personSaved.gender)
+        val personSaved = repository.save(
+            PersonEntity(
+                personDomain.id,
+                personDomain.firstName,
+                personDomain.lastName,
+                personDomain.address,
+                personDomain.gender
+            )
+        )
+        return PersonDomain(
+            personSaved.id,
+            personSaved.firstName,
+            personSaved.lastName,
+            personSaved.address,
+            personSaved.gender
+        )
     }
 }
