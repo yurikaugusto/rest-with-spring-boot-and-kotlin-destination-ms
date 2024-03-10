@@ -22,3 +22,4 @@ spring:
         consumer:
             group-id: "person.group-id"
             topic: "PERSON.CONSUMER.TOPIC"
+            auto-offset-reset: "earliest"
