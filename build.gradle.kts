@@ -25,14 +25,16 @@ dependencies {
 	implementation("org.flywaydb:flyway-mysql")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation ("org.springframework.kafka:spring-kafka")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("mysql:mysql-connector-java:8.0.33")
 
 	testImplementation ("org.testcontainers:mysql:1.16.3")
 	testImplementation ("io.rest-assured:rest-assured:5.3.0")
 	testImplementation ("org.mockito:mockito-core:4.4.0")
-
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation ("org.springframework.kafka:spring-kafka-test")
 }
 
 tasks.withType<KotlinCompile> {
