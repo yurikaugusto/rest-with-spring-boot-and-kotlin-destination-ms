@@ -1,6 +1,6 @@
 package br.com.yuri.adapters.`in`.controller.exception.handler
 
-import br.com.yuri.adapters.`in`.controller.exception.PersonNotFoundException
+import br.com.yuri.adapters.`in`.controller.exception.PersonNotFoundRestException
 import br.com.yuri.adapters.`in`.controller.response.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -17,8 +17,8 @@ import java.time.format.DateTimeFormatter
 class ControllerAdvice : ResponseEntityExceptionHandler() {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(PersonNotFoundException::class)
-    fun handlePersonNotFoundException(exception: PersonNotFoundException, request: WebRequest): ErrorResponse =
+    @ExceptionHandler(PersonNotFoundRestException::class)
+    fun handlePersonNotFoundException(exception: PersonNotFoundRestException, request: WebRequest): ErrorResponse =
         ErrorResponse(
             getCurrentDateWithTimeZone(),
             exception.message ?: "Unknown error",

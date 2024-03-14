@@ -2,6 +2,7 @@ package br.com.yuri.adapters.`in`.controller
 
 import br.com.yuri.adapters.`in`.controller.request.PersonRequest
 import br.com.yuri.adapters.`in`.controller.response.PersonResponse
+import br.com.yuri.application.core.domain.Context
 import br.com.yuri.application.core.domain.PersonDomain
 import br.com.yuri.application.ports.`in`.DeletePersonInputPort
 import br.com.yuri.application.ports.`in`.FindPersonInputPort
@@ -29,7 +30,7 @@ class PersonController(
                 personRequest.lastName,
                 personRequest.address,
                 personRequest.gender
-            )
+            ), Context.REST
         )
         return ResponseEntity(
             PersonResponse(
@@ -44,7 +45,7 @@ class PersonController(
 
     @GetMapping
     fun findAll(): ResponseEntity<*> {
-        val listPerson = findPersonInputPort.findAll()
+        val listPerson = findPersonInputPort.findAll(Context.REST)
         val personResponseList =
             listPerson.map { PersonResponse(it.id, it.firstName, it.lastName, it.address, it.gender) }
         return ResponseEntity(personResponseList, HttpStatus.OK)
@@ -52,7 +53,7 @@ class PersonController(
 
     @GetMapping("{id}")
     fun findById(@PathVariable("id") id: Long): ResponseEntity<*> {
-        val personDomain = findPersonInputPort.findById(id)
+        val personDomain = findPersonInputPort.findById(id, Context.REST)
         return ResponseEntity(
             PersonResponse(
                 personDomain.id,
@@ -73,7 +74,7 @@ class PersonController(
                 person.lastName,
                 person.address,
                 person.gender
-            )
+            ), Context.REST
         )
         return ResponseEntity(
             PersonResponse(
@@ -88,7 +89,7 @@ class PersonController(
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Long): ResponseEntity<*> {
-        deletePersonInputPort.deleteById(id)
+        deletePersonInputPort.deleteById(id, Context.REST)
         return ResponseEntity(null, HttpStatus.NO_CONTENT)
     }
 }
