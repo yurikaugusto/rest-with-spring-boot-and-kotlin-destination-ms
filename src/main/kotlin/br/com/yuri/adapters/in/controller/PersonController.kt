@@ -8,6 +8,8 @@ import br.com.yuri.application.ports.`in`.DeletePersonInputPort
 import br.com.yuri.application.ports.`in`.FindPersonInputPort
 import br.com.yuri.application.ports.`in`.InsertPersonInputPort
 import br.com.yuri.application.ports.`in`.UpdatePersonInputPort
+import br.com.yuri.config.GenericLogger
+import org.slf4j.Logger
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -21,8 +23,11 @@ class PersonController(
     private val deletePersonInputPort: DeletePersonInputPort
 ) {
 
+    private val log: Logger = GenericLogger.loggerFor(PersonController::class.java)
+
     @PostMapping
     fun create(@RequestBody personRequest: PersonRequest): ResponseEntity<*> {
+        log.info("Payload received to create person: $personRequest")
         val personDomain = insertPersonInputPort.create(
             PersonDomain(
                 null,
@@ -53,6 +58,7 @@ class PersonController(
 
     @GetMapping("{id}")
     fun findById(@PathVariable("id") id: Long): ResponseEntity<*> {
+        log.info("Payload received to find person: $id")
         val personDomain = findPersonInputPort.findById(id, Context.REST)
         return ResponseEntity(
             PersonResponse(
@@ -67,6 +73,7 @@ class PersonController(
 
     @PutMapping
     fun update(@RequestBody person: PersonRequest): ResponseEntity<*> {
+        log.info("Payload received to update person: $person")
         val updatedPerson: PersonDomain = updatePersonInputPort.update(
             PersonDomain(
                 person.id,
@@ -89,6 +96,7 @@ class PersonController(
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Long): ResponseEntity<*> {
+        log.info("Payload received to delete person: $id")
         deletePersonInputPort.deleteById(id, Context.REST)
         return ResponseEntity(null, HttpStatus.NO_CONTENT)
     }

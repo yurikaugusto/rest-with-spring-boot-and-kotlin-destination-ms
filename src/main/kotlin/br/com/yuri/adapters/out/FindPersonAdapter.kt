@@ -6,6 +6,8 @@ import br.com.yuri.adapters.out.repository.PersonRepository
 import br.com.yuri.application.core.domain.Context
 import br.com.yuri.application.core.domain.PersonDomain
 import br.com.yuri.application.ports.out.FindPersonOutputPort
+import br.com.yuri.config.GenericLogger
+import org.slf4j.Logger
 import org.springframework.stereotype.Component
 import kotlin.jvm.optionals.getOrNull
 
@@ -13,11 +15,24 @@ import kotlin.jvm.optionals.getOrNull
 class FindPersonAdapter(
     private val repository: PersonRepository
 ) : FindPersonOutputPort {
+
+    private val log: Logger = GenericLogger.loggerFor(FindPersonAdapter::class.java)
+
     override fun findById(id: Long, context: Context): PersonDomain {
+        log.info("Searching person with id: $id, context: $context")
+        val errorMessage = "Person with id: $id not found"
         val personEntity = repository.findById(id).getOrNull() ?: when (context) {
-            Context.REST -> throw PersonNotFoundRestException("Person with id: $id not found")
-            Context.KAKFA -> throw PersonNotFoundKafkaException("Person with id: $id not found")
+            Context.REST -> {
+                log.error(errorMessage)
+                throw PersonNotFoundRestException(errorMessage)
+            }
+
+            Context.KAKFA -> {
+                log.error(errorMessage)
+                throw PersonNotFoundKafkaException(errorMessage)
+            }
         }
+        log.info("Operation carried out successfully")
         return PersonDomain(
             personEntity.id,
             personEntity.firstName,
@@ -28,7 +43,9 @@ class FindPersonAdapter(
     }
 
     override fun findAll(context: Context): List<PersonDomain> {
+        log.info("Searching all registered people, context: $context")
         val entityList = repository.findAll()
+        log.info("Operation carried out successfully")
         val personDomainList = entityList.map { PersonDomain(it.id, it.firstName, it.lastName, it.address, it.gender) }
         return personDomainList
     }

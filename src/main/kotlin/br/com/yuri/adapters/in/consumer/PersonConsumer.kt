@@ -9,10 +9,11 @@ import br.com.yuri.adapters.`in`.consumer.message.toPersonDomain
 import br.com.yuri.application.core.domain.Context
 import br.com.yuri.application.core.domain.MessageDomain
 import br.com.yuri.application.ports.`in`.*
+import br.com.yuri.config.GenericLogger
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.slf4j.LoggerFactory
+import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
@@ -26,9 +27,10 @@ class PersonConsumer(
     private val deletePersonInputPort: DeletePersonInputPort,
     private val publishMessageInputPort: PublishMessageInputPort,
     @Value("\${spring.kafka.producer.topic}")
-    private val producerTopic: String
+    private val producerTopic: String,
 ) {
-    private val log = LoggerFactory.getLogger(PersonConsumer::class.java)
+
+    private val log: Logger = GenericLogger.loggerFor(PersonConsumer::class.java)
 
     @KafkaListener(topics = ["\${spring.kafka.consumer.topic}"], groupId = "\${spring.kafka.consumer.group-id}")
     fun processMessage(content: String) {
