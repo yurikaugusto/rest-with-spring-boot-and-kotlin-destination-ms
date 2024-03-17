@@ -26,7 +26,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.springframework.kafka:spring-kafka")
-
+// Dependency for using coroutines
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("mysql:mysql-connector-java:8.0.33")
 
